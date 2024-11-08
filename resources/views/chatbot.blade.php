@@ -4,57 +4,60 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Chatbot</title>
-    <meta name="csrf-token" content="{{ csrf_token() }}">
+    <title>FinIQ - Financial IQ</title>
+    <link rel="stylesheet" href="{{ asset('css/chatbot.css') }}">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,opsz@0,6..96;1,6..96&family=Della+Respira&family=Faculty+Glyphic&family=Marhey:wght@300..700&display=swap" rel="stylesheet">
 </head>
 <body>
-    <h1>Chatbot</h1>
-    <div id="chat-container">
-        <!-- Chat messages will be appended here -->
+<div class="chat-container">
+    <h1>FinIQ</h1>
+    <div id="chat-box" class="chat-box">
+        <center><p>Smart Money, Smarter You – Powered by <strong>FinIQ</strong></p></center>
     </div>
-    
-    <div>
-        <textarea id="userMessage" placeholder="Type your message here..."></textarea>
+    <div class="input-area">
+        <textarea id="userMessage" placeholder="Type your message..."></textarea>
         <button onclick="sendMessage()">Send</button>
     </div>
-    <div id="chatResponse" style="margin-top: 10px; padding: 10px; border: 1px solid #ddd;"></div>
+</div>
 
-    <script>
-        function sendMessage() {
-    const userMessage = document.getElementById('userMessage').value;
-    const csrfToken = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
+<script>
+    function sendMessage() {
+        const userMessage = document.getElementById('userMessage').value;
 
-    fetch('/api/chat', {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json',
-            'X-CSRF-TOKEN': csrfToken
-        },
-        body: JSON.stringify({ message: userMessage })
-    })
-    .then(response => {
-        // Ensure response is JSON
-        if (!response.ok) {
-            throw new Error("Network response was not ok");
-        }
-        return response.json();
-    })
-    .then(data => {
-        const chatResponseDiv = document.getElementById('chatResponse');
-        if (data.response) {
-            chatResponseDiv.innerText = data.response;
-            console.log("Chatbot response:", data.response);
-        } else {
-            chatResponseDiv.innerText = 'An error occurred: ' + (data.error || 'Unknown error');
-            console.error("Error:", data.error || 'Unknown error');
-        }
-    })
-    .catch(error => {
-        console.error('Fetch error:', error);
-        document.getElementById('chatResponse').innerText = 'An unexpected error occurred.';
-    });
-}
+        // Add user message to chat box aligned to the right
+        const chatBox = document.getElementById('chat-box');
+        const userBubble = `<div class="message user-message">${userMessage}</div>`;
+        chatBox.innerHTML += userBubble;
 
-    </script>
+        // Clear the input field
+        document.getElementById('userMessage').value = '';
+
+        // Fetch AI response
+        fetch('/api/chat', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'X-CSRF-TOKEN': '{{ csrf_token() }}'
+            },
+            body: JSON.stringify({ message: userMessage })
+        })
+        .then(response => response.json())
+        .then(data => {
+            // Add AI response to chat box aligned to the left
+            if (data.response) {
+                const botBubble = `<div class="message bot-message">${data.response}</div>`;
+                chatBox.innerHTML += botBubble;
+                chatBox.scrollTop = chatBox.scrollHeight; // Scroll to the latest message
+            } else {
+                chatBox.innerHTML += `<div class="message bot-message">Error: ${data.error || 'Unknown error'}</div>`;
+            }
+        })
+        .catch(error => {
+            console.error('Error:', error);
+        });
+    }
+</script>
 </body>
 </html>
