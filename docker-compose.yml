@@ -6,8 +6,8 @@ services:
     volumes:
       - .:/var/www
     ports:
-      - "80:80"
-    command: php artisan serve --host=0.0.0.0 --port=80
+      - "2003:2003"
+    command: php artisan serve --host=0.0.0.0 --port=2003
     environment:
       - APP_KEY=${APP_KEY}
       - DB_HOST=db

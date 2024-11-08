@@ -24,7 +24,7 @@ RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local
 RUN composer install --no-dev --optimize-autoloader
 
 # Expose port
-EXPOSE 80
+EXPOSE 2003
 
 # Start the Laravel application
 CMD ["php-fpm"]
