@@ -7,7 +7,7 @@ services:
       - .:/var/www
     ports:
       - "2003:2003"
-    command: php artisan serve --host=0.0.0.0 --port=2003
+    command: php artisan serve --host=0.0.0.0 --port=$PORT
     environment:
       - APP_KEY=${APP_KEY}
       - DB_HOST=db
