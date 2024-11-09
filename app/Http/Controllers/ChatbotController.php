@@ -18,7 +18,7 @@ class ChatbotController extends Controller
         $userMessage = $request->input('message');
 
         // Prepare data for Vultr API request
-        $apiUrl = "http://api.vultrinference.com/v1/chat/completions/RAG";
+        $apiUrl = "https://api.vultrinference.com/v1/chat/completions/RAG";
         $apiKey = env('VULTR_API_KEY'); // Ensure API key is set in .env file
         set_time_limit(60); 
         $response = Http::withHeaders([
