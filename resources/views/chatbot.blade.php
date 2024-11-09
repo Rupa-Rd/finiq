@@ -5,10 +5,10 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>FinIQ - Financial IQ</title>
-    <link rel="stylesheet" href="{{ asset('css/chatbot.css') }}">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,opsz@0,6..96;1,6..96&family=Della+Respira&family=Faculty+Glyphic&family=Marhey:wght@300..700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="http://158.247.243.239/css/chatbot.css">
+    <link rel="preconnect" href="http://fonts.googleapis.com">
+<link rel="preconnect" href="http://fonts.gstatic.com" crossorigin>
+<link href="http://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,opsz@0,6..96;1,6..96&family=Della+Respira&family=Faculty+Glyphic&family=Marhey:wght@300..700&display=swap" rel="stylesheet">
 </head>
 <body>
 <div class="chat-container">
