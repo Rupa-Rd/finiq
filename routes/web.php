@@ -11,4 +11,4 @@ Route::get('/', function () {
 Route::get('/chatbot', [ChatbotController::class, 'index'])->name('chatbot');
 
 // Route to handle API request to Vultr Inference API
-Route::post('/api/chat', [ChatbotController::class, 'sendMessage']);
+Route::post('/chat', [ChatbotController::class, 'sendMessage']);
