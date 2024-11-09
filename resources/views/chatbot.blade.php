@@ -35,7 +35,7 @@
         document.getElementById('userMessage').value = '';
 
         // Fetch AI response
-        fetch('/api/chat', {
+        fetch('http://158.247.243.239/api/chat', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
